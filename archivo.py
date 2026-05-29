@@ -98,7 +98,7 @@ def iniciarSesion(usuario, clientes):
 
         if cliente[0] == usuario:
             print("Usuario encontrado")
-            final = cliente[i]
+            final = cliente
             break
     if final == "":
         return None
