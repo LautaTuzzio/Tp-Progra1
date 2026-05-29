@@ -105,6 +105,21 @@ def iniciarSesion(usuario, clientes):
     return final
 def verSaldo(cliente):
     print(f"Saldo de la cuenta: ${cliente[3]} ")
+
+def deposito(cliente):
+    if cliente is None:
+        print("Usuario no encontrado")
+    
+    monto= float(input("Ingrese el monto a depositar:"))
+    if monto <= 0:
+        print("El monto a depositar debe ser mayor a 0")
+    
+    cliente[2]= cliente[2] + monto
+
+    print("Deposito realizado")
+    print("Nuevo saldo:", cliente[2])
+
+  
 #----------------------------------------------------------------------------------------------
 # CUERPO PRINCIPAL
 #----------------------------------------------------------------------------------------------
@@ -171,9 +186,9 @@ def main():
             cliente = iniciarSesion(usuario, clientes)
             print(f"Cliente: {cliente}")
         elif opcion == "2":   # Opción 2
-            print(verSaldo(cliente))
+            verSaldo(cliente)
         elif opcion == "3":   # Opción 3
-            ...
+            deposito(cliente)
         elif opcion == "4":   # Opción 4
             ...
         elif opcion == "5":   # Opción 5
