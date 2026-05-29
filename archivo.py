@@ -104,6 +104,13 @@ def iniciarSesion(usuario, clientes):
         return None
     return final
 
+def depositar_saldo(saldo_actual, monto_deposito):
+    if monto_deposito <= 0:
+        print("El monto a depositar debe ser mayor a 0") 
+
+    nuevo_saldo = saldo_actual + monto_deposito
+    return nuevo_saldo
+
 #----------------------------------------------------------------------------------------------
 # CUERPO PRINCIPAL
 #----------------------------------------------------------------------------------------------
