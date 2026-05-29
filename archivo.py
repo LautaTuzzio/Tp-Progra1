@@ -1,12 +1,12 @@
 """
 -----------------------------------------------------------------------------------------------
-Título:
-Fecha:
-Autor:
+Título: TP Progra
+Fecha: 29/5/2026
+Autor: Grupo 3
 
-Descripción:
+Descripción: Un sistema de gestion bancaria
 
-Pendientes:
+Pendientes: ---
 -----------------------------------------------------------------------------------------------
 """
 
