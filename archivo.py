@@ -103,17 +103,8 @@ def iniciarSesion(usuario, clientes):
     if final == "":
         return None
     return final
-
-
-def retirarSaldo(cliente):
-    """Funcion para retirar saldo
-    Recibe el cliente y retira el saldo
-    """
-    saldoParaRetirar = int(input("Ingrese el saldo a retirar: "))
-    print(f"Saldo antiguo: {cliente[3]}")
-    cliente[3] -= saldoParaRetirar
-    print(f"Saldo retirado. Su saldo actual es: {cliente[3]}")
-    
+def verSaldo(cliente):
+    print(f"Saldo de la cuenta: ${cliente[3]} ")
 #----------------------------------------------------------------------------------------------
 # CUERPO PRINCIPAL
 #----------------------------------------------------------------------------------------------
@@ -123,8 +114,7 @@ def main():
     #----------------------------------------------------------------------------------------------
     #cuit,nombre,pwrd,sueldo,cuenta_sueldo,cuenta_corriente, plazo_fijo
     clientes = [
-    #cuit,            nombre,  pwrd, sueldo,    cuenta_sueldo,cuenta_corriente, plazo_fijo    
-    ["27-11222333-0", "Maria", 1234, 1_500_000, 0,            0,                1_000],
+    ["27-11222333-0", "Maria", 1234, 1_500_000, 0, 0, 1_000],
     ["23-22333444-9", "Luis", 2345, 1_800_000, 15_000, -15_000, 1_000],
     ["20-44252999-8", "Jose", 9685, 2_000_000, 10_000, -1_000, 1_000],
     ["29-55667788-2", "Ana", 4521, 1_600_000, 5_000, 500, 500],
@@ -152,7 +142,7 @@ def main():
             print("MENÚ DEL DIGITAL BANK      ")
             print("---------------------------")
             print("[1] Opción 1")
-            print("[2] Opción 2")
+            print("[2] Opcion 2")
             print("[3] Opción 3")
             print("[4] Opción 4")
             print("[5] Opción 5")
@@ -181,11 +171,11 @@ def main():
             cliente = iniciarSesion(usuario, clientes)
             print(f"Cliente: {cliente}")
         elif opcion == "2":   # Opción 2
-            ...
+            print(verSaldo(cliente))
         elif opcion == "3":   # Opción 3
             ...
         elif opcion == "4":   # Opción 4
-            retirarSaldo(cliente)
+            ...
         elif opcion == "5":   # Opción 5
             ...
         elif opcion == "6":   # Opción 6
