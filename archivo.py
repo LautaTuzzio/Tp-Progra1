@@ -87,6 +87,22 @@ def validarCuit():
 
     return valor
 
+def iniciarSesion(usuario, clientes):
+    """Funcion para iniciar sesion
+    Recibe el cuit y la lista de clientes
+    Retorna el cliente encontrado
+    """
+    final = ""
+    usuario = str(usuario)
+    for i, cliente in enumerate(clientes):
+
+        if cliente[0] == usuario:
+            print("Usuario encontrado")
+            final = cliente[i]
+            break
+    if final == "":
+        return None
+    return final
 
 #----------------------------------------------------------------------------------------------
 # CUERPO PRINCIPAL
@@ -96,7 +112,6 @@ def main():
     # Inicialización de variables
     #----------------------------------------------------------------------------------------------
     #cuit,nombre,pwrd,sueldo,cuenta_sueldo,cuenta_corriente, plazo_fijo
-    print(validarCuit())
     clientes = [
     ["27-11222333-0", "Maria", 1234, 1_500_000, 0, 0, 1_000],
     ["23-22333444-9", "Luis", 2345, 1_800_000, 15_000, -15_000, 1_000],
@@ -114,8 +129,7 @@ def main():
     ["33-88997766-4", "Julieta", 2468, 1_650_000, 14_000, -1_500, 550],
     ["35-55443322-5", "Leandro", 3698, 2_300_000, 50_000, -20_000, 1_800]
     ]
-    usuario = None
-
+    usuario = validarCuit()
     #-------------------------------------------------
     # Bloque de menú
     #----------------------------------------------------------------------------------------------
@@ -153,7 +167,8 @@ def main():
             exit() # También puede ser sys.exit() para lo cual hay que importar el módulo sys
 
         elif opcion == "1":   # Opción 1
-            ...
+            cliente = iniciarSesion(usuario, clientes)
+            print(f"Cliente: {cliente}")
         elif opcion == "2":   # Opción 2
             ...
         elif opcion == "3":   # Opción 3
