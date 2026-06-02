@@ -87,37 +87,121 @@ def validarCuit():
 
     return valor
 
-def iniciarSesion(usuario, clientes):
-    """Funcion para iniciar sesion
-    Recibe el cuit y la lista de clientes
-    Retorna el cliente encontrado
+def iniciarSesion(clientes):
     """
-    final = ""
-    usuario = str(usuario)
+    Permite iniciar sesión.
+    Retorna la posición del cliente o None.
+    """
+
+    cuit = validarCuit()
+
     for i, cliente in enumerate(clientes):
+        if cliente[0] == cuit:
 
-        if cliente[0] == usuario:
-            print("Usuario encontrado")
-            final = cliente
+            clave = pedirNumero(
+                "Ingresa contraseña: ",
+                "La contraseña debe ser numérica",
+                "Contraseña fuera de rango",
+                1000,
+                9999
+            )
+
+            if cliente[2] == clave:
+                print("Loggeo Exitoso")
+                print(f"Bienvenido {cliente[1]} id {i}!")
+                return i
+
+            print("Vuelva intentar")
+            print("Usuario Inexistente")
+            return None
+
+    print("Usuario Inexistente")
+    return None
+
+def cerrarSesion():
+    """
+    Cierra la sesión actual.
+    """
+    print("Sesión cerrada")
+    return None
+
+def verSaldo(posicion, clientes):
+    """
+    Permite consultar saldos.
+    """
+
+    print(f"Hola, {clientes[posicion][1]}, ¿Qué saldo deseas ver?")
+    print("[1] Cuenta Sueldo")
+    print("[2] Cuenta Corriente")
+    print("[3] Dólares")
+
+    opcion = input("Opción: ")
+
+    if opcion == "1":
+        print(f"Saldo en Cuenta Sueldo: ${clientes[posicion][4]:.2f}")
+
+    elif opcion == "2":
+        print(f"Saldo en Cuenta Corriente: ${clientes[posicion][5]:.2f}")
+
+    elif opcion == "3":
+        print(f"Saldo en Cuenta Dólares: USD ${clientes[posicion][6]:.2f}")
+
+    else:
+        print("Opción inválida")
+
+def depositar(posicion, clientes):
+    """
+    Deposita dinero en cuenta sueldo.
+    """
+
+    while True:
+
+        monto = pedirNumero(
+            "¿Cuánto deposita?: ",
+            "Importe inválido",
+            "Valor fuera de rango",
+            1000,
+            1_000_000
+        )
+
+        if monto % 1000 != 0:
+            print("Importe inválido")
+        else:
             break
-    if final == "":
-        return None
-    return final
-def verSaldo(cliente):
-    print(f"Saldo de la cuenta: ${cliente[3]} ")
 
-def deposito(cliente):
-    if cliente is None:
-        print("Usuario no encontrado")
-    
-    monto= float(input("Ingrese el monto a depositar:"))
-    if monto <= 0:
-        print("El monto a depositar debe ser mayor a 0")
-    
-    cliente[2]= cliente[2] + monto
+    clientes[posicion][4] += monto
 
-    print("Deposito realizado")
-    print("Nuevo saldo:", cliente[2])
+    print(f"Nuevo saldo: ${clientes[posicion][4]}")
+
+def retirar(posicion, clientes):
+    """
+    Retira dinero de la cuenta sueldo.
+    """
+
+    saldo = clientes[posicion][4]
+
+    if saldo < 1000:
+        print(f"No se puede retirar dinero. Saldo en cuenta: {saldo}")
+        return
+
+    while True:
+
+        monto = pedirNumero(
+            f"¿Cuánto retira? minimo $1000 y máximo {saldo}: ",
+            "Importe inválido",
+            "Valor fuera de rango",
+            1000,
+            saldo
+        )
+
+        if monto % 1000 != 0:
+            print("Importe inválido")
+        else:
+            break
+
+    clientes[posicion][4] -= monto
+
+    print(f"Nuevo saldo: ${clientes[posicion][4]}")
 
   
 #----------------------------------------------------------------------------------------------
@@ -127,6 +211,7 @@ def main():
     #-------------------------------------------------
     # Inicialización de variables
     #----------------------------------------------------------------------------------------------
+    usuario = None
     #cuit,nombre,pwrd,sueldo,cuenta_sueldo,cuenta_corriente, plazo_fijo
     clientes = [
     ["27-11222333-0", "Maria", 1234, 1_500_000, 0, 0, 1_000],
@@ -178,32 +263,55 @@ def main():
                 input("Opción inválida. Presione ENTER para volver a seleccionar.")
         print()
 
-        if opcion == "0": # Opción salir del programa
+        if opcion == "0":
             print("Adiós")
-            exit() # También puede ser sys.exit() para lo cual hay que importar el módulo sys
+            exit()
 
-        elif opcion == "1":   # Opción 1
-            cliente = iniciarSesion(usuario, clientes)
-            print(f"Cliente: {cliente}")
-        elif opcion == "2":   # Opción 2
-            verSaldo(cliente)
-        elif opcion == "3":   # Opción 3
-            deposito(cliente)
-        elif opcion == "4":   # Opción 4
-            ...
-        elif opcion == "5":   # Opción 5
-            ...
-        elif opcion == "6":   # Opción 6
-            ...
-        elif opcion == "7":   # Opción 7
-            ...
-        elif opcion == "8":   # Opción 8
-            ...
-        elif opcion == "9":   # Opción 9
-            ...
-        elif opcion == "10":   # Opción 10
-            ...
+        elif opcion == "1":   # Iniciar sesión
+            if usuario is None:
+                usuario = iniciarSesion(clientes)
+            else:
+                print("Ya hay una sesión iniciada")
 
+        elif opcion == "2":   # Ver saldo
+            if usuario is None:
+                print("Debe iniciar sesión primero")
+            else:
+                verSaldo(usuario, clientes)
+
+        elif opcion == "3":   # Depositar
+            if usuario is None:
+                print("Debe iniciar sesión primero")
+            else:
+                depositar(usuario, clientes)
+
+        elif opcion == "4":   # Retirar
+            if usuario is None:
+                print("Debe iniciar sesión primero")
+            else:
+                retirar(usuario, clientes)
+
+        elif opcion == "5":   # Cerrar sesión
+            if usuario is None:
+                print("No hay una sesión iniciada")
+            else:
+                usuario = cerrarSesion()
+
+        elif opcion == "6":
+            print("Opción no implementada")
+
+        elif opcion == "7":
+            print("Opción no implementada")
+
+        elif opcion == "8":
+            print("Opción no implementada")
+
+        elif opcion == "9":
+            print("Opción no implementada")
+
+        elif opcion == "10":
+            print("Opción no implementada")
+        
         input("\nPresione ENTER para volver al menú.")
         print("\n\n")
 
