@@ -254,7 +254,7 @@ def main():
             print("[0] Salir del programa")
             print("---------------------------")
             print()
-            print(usuario)
+            print("Si esta es tu primera vez en el sistema, Cierra sesión e inicia devuelta para utilizarlo")
             opcion = input("Seleccione una opción: ")
             if opcion in [str(i) for i in range(0, opciones + 1)]: # Sólo continua si se elije una opcion de menú válida
                 break
