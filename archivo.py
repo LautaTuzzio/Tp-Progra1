@@ -6,7 +6,8 @@ Autor: Grupo 3
 
 Descripción: Un sistema de gestion bancaria
 
-Pendientes: ---
+Pendientes: Solucionar error que si el usuario ingresa por primera vez, validarCuit devuelve el
+dni y no la posicion del usuario, no permitiendons utilizar el sistema correctamente debido al formato
 -----------------------------------------------------------------------------------------------
 """
 
