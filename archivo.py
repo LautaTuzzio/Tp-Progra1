@@ -129,7 +129,6 @@ def verSaldo(posicion, clientes):
     """
     Permite consultar saldos.
     """
-
     print(f"Hola, {clientes[posicion][1]}, ¿Qué saldo deseas ver?")
     print("[1] Cuenta Sueldo")
     print("[2] Cuenta Corriente")
@@ -138,13 +137,13 @@ def verSaldo(posicion, clientes):
     opcion = input("Opción: ")
 
     if opcion == "1":
-        print(f"Saldo en Cuenta Sueldo: ${clientes[posicion][4]:.2f}")
+        print(f"Saldo en Cuenta Sueldo: ${clientes[posicion][3]:.2f}")
 
     elif opcion == "2":
-        print(f"Saldo en Cuenta Corriente: ${clientes[posicion][5]:.2f}")
+        print(f"Saldo en Cuenta Corriente: ${clientes[posicion][4]:.2f}")
 
     elif opcion == "3":
-        print(f"Saldo en Cuenta Dólares: USD ${clientes[posicion][6]:.2f}")
+        print(f"Saldo en Cuenta Dólares: USD ${clientes[posicion][5]:.2f}")
 
     else:
         print("Opción inválida")
@@ -212,7 +211,7 @@ def main():
     # Inicialización de variables
     #----------------------------------------------------------------------------------------------
     usuario = None
-    #cuit,nombre,pwrd,sueldo,cuenta_sueldo,cuenta_corriente, plazo_fijo
+    #cuit,nombre,pwrd,sueldo,cuenta_sueldo,cuenta_corriente, cuenta_dolares, plazo_fijo
     clientes = [
     ["27-11222333-0", "Maria", 1234, 1_500_000, 0, 0, 1_000],
     ["23-22333444-9", "Luis", 2345, 1_800_000, 15_000, -15_000, 1_000],
@@ -255,7 +254,7 @@ def main():
             print("[0] Salir del programa")
             print("---------------------------")
             print()
-            
+            print(usuario)
             opcion = input("Seleccione una opción: ")
             if opcion in [str(i) for i in range(0, opciones + 1)]: # Sólo continua si se elije una opcion de menú válida
                 break
@@ -272,7 +271,7 @@ def main():
                 usuario = iniciarSesion(clientes)
             else:
                 print("Ya hay una sesión iniciada")
-
+    
         elif opcion == "2":   # Ver saldo
             if usuario is None:
                 print("Debe iniciar sesión primero")
