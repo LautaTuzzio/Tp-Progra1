@@ -245,7 +245,7 @@ def main():
             print("[2] Opcion 2, Consultar saldo.")
             print("[3] Opción 3, Depositar")
             print("[4] Opción 4, Retirar")
-            print("[5] Opción 51")
+            print("[5] Opción 5, Cerrar sesión")
             print("[6] Opción 6")
             print("[7] Opción 7")
             print("[8] Opción 8")
