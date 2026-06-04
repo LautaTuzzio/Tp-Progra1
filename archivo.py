@@ -231,6 +231,9 @@ def main():
     ["35-55443322-5", "Leandro", 3698, 2_300_000, 50_000, -20_000, 1_800]
     ]
     usuario = validarCuit()
+    for i, _ in enumerate(clientes):
+        if clientes[i][0] == usuario:
+            usuario = i
     #-------------------------------------------------
     # Bloque de menú
     #----------------------------------------------------------------------------------------------
@@ -254,8 +257,6 @@ def main():
             print("---------------------------")
             print("[0] Salir del programa")
             print("---------------------------")
-            print()
-            print("Si esta es tu primera vez en el sistema, Cierra sesión e inicia devuelta para utilizarlo")
             opcion = input("Seleccione una opción: ")
             if opcion in [str(i) for i in range(0, opciones + 1)]: # Sólo continua si se elije una opcion de menú válida
                 break
