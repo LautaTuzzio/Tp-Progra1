@@ -686,7 +686,6 @@ def main():
 
         input("\nPresione ENTER para volver al menú.")
         os.system("cls")
-        print("\n\n")
 
 
 # Punto de entrada al programa
