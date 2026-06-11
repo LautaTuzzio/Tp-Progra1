@@ -103,8 +103,8 @@ def obtenerCotizacionDolar():
         respuesta = requests.get("https://dolarapi.com/v1/dolares/blue")
         if respuesta.status_code == 200:
             datos = respuesta.json()
-            compra = datos.get("compra", COTIZACION_FALLBACK)
-            venta = datos.get("venta", COTIZACION_FALLBACK)
+            compra = 1500 #datos.get("compra", COTIZACION_FALLBACK)
+            venta = 1460 #datos.get("venta", COTIZACION_FALLBACK)
             return compra, venta
         else:
             print(f"(API dolarapi no disponible, usando cotización de respaldo: ${COTIZACION_FALLBACK})")
